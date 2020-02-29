@@ -1,0 +1,34 @@
+{
+    "name": "ogunsakindamilola/laravel-interswitch",
+    "description": "A laravel package for Interswitch",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ogunsakin Damilola",
+            "email": "ogunsakin191@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.2",
+        "guzzlehttp/guzzle": "^6.5",
+        "illuminate/support": "^6.17",
+        "illuminate/mail": "^6.17"
+    },
+    "autoload": {
+        "psr-4": {
+            "OgunsakinDamilola\\Interswitch\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "OgunsakinDamilola\\Interswitch\\InterswitchServiceProvider"
+            ],
+            "aliases": {
+                "Interswitch": "OgunsakinDamilola\\Interswitch\\Facade\\Interswitch"
+            }
+        }
+    }
+}
