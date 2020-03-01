@@ -93,6 +93,10 @@
                 lengthMenu: '_MENU_ items/page',
             }
         });
+        $('.requery').on('click',function(){
+            let reference = $(this).val();
+            toastr.info(reference);
+        });
     });
 </script>
 </html>
