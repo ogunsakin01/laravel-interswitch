@@ -70,7 +70,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/af-2.3.4/b-1.6.0/b-colvis-1.6.0/b-flash-1.6.0/b-html5-1.6.0/b-print-1.6.0/fh-3.1.6/r-2.2.3/sc-2.0.1/sl-1.3.1/datatables.min.js"></script>
 <script>
-    $(document).ready(function(){
+    $(document).ready(() => {
         $('.table').DataTable({
 
             dom: 'Bfrtip',
@@ -93,8 +93,15 @@
                 lengthMenu: '_MENU_ items/page',
             }
         });
-        $('.requery').on('click',function(){
+        $('.requery').on('click',() => {
             let reference = $(this).val();
+            axios.post('/interswitch-confirm-payment',reference)
+                .then((response)=> {
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error.response);
+                });
             toastr.info(reference);
         });
     });
