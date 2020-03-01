@@ -12,30 +12,33 @@ class Interswitch extends InterswitchTransactionsHelper
 {
     public function generatePayment($paymentData): array
     {
+        $amount = $paymentData['amount'] * 100;
         $reference = $this->transactionReferenceHandler(Arr::has($paymentData, 'reference', ''));
-        $hash = $this->initializeTransactionHash($reference, $paymentData['amount']);
+        $hash = $this->initializeTransactionHash($reference, $amount);
         $payment = [
             'customer_id' => $paymentData['customer_id'],
             'customer_name' => $paymentData['customer_name'],
+            'customer_email' => $paymentData['customer_email'],
             'environment' => $this->env,
             'gateway' => $this->gateway,
             'reference' => $reference,
-            'amount' => $paymentData['amount'],
+            'amount' => $amount,
             'response_code' => 0,
             'response_description' => 'Pending',
             'payment_status' => 0,
             'response_full' => ''
         ];
-        InterswitchPayment::create($payment);
         Mail::to($paymentData['customer_email'])->send(new PrePaymentNotification($payment));
+        InterswitchPayment::create($payment);
         return [
             'customerId' => $paymentData['customer_id'],
             'customerName' => $paymentData['customer_name'],
+            'amount' => $amount,
             'reference' => $reference,
-            'redirectUrl' => $this->redirectUrl,
+            'systemRedirectUrl' => $this->systemRedirectUrl,
+            'currency' => $this->currency,
             'productId' => $this->productId,
             'itemId' => $this->itemId,
-            'currency' => $this->currency,
             'requestUrl' => $this->requestUrl,
             'queryUrl' => $this->queryUrl,
             'hash' => $hash

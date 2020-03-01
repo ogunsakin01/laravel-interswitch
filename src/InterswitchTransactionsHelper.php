@@ -1,7 +1,7 @@
 <?php
-namespace OgunsakinDamilola\Interswitch;
+namespace OgunsakinDamilola\interswitch;
 
-class InterswitchTransactionsHelper
+class interswitchTransactionsHelper
 {
     protected $env;
 
@@ -13,6 +13,8 @@ class InterswitchTransactionsHelper
 
     protected $redirectUrl;
 
+    protected $systemRedirectUrl;
+
     protected $macKey;
 
     protected $requestUrl;
@@ -23,11 +25,11 @@ class InterswitchTransactionsHelper
 
     public function __construct()
     {
-        dd(config('interswitch.env'));
         $this->env = config('interswitch.env');
         $this->gateway = config('interswitch.gateway');
         $this->redirectUrl = config('interswitch.redirectUrl');
-        $this->currency = config('Interswitch.currency');
+        $this->systemRedirectUrl = url(config('interswitch.systemRedirectUrl'));
+        $this->currency = config('interswitch.currency');
         $this->environmentHandler();
     }
 
@@ -78,7 +80,7 @@ class InterswitchTransactionsHelper
 
     protected function initializeTransactionHash($reference, $amount): string
     {
-        $hashString = $reference . $this->productId . $this->itemId . $amount . $this->redirectUrl . $this->macKey;
+        $hashString = $reference . $this->productId . $this->itemId . $amount . $this->systemRedirectUrl . $this->macKey;
         return hash('SHA512', $hashString);
     }
 
@@ -86,5 +88,13 @@ class InterswitchTransactionsHelper
     {
         $hashString = $this->productId . $reference . $this->macKey;
         return hash('SHA512', $hashString);
+    }
+
+    protected function rebuildRedirectUrl(array $parameters){
+        $returnUrl = $this->redirectUrl.'?';
+        foreach($parameters as $key => $parameter){
+          $returnUrl = $returnUrl.$key.'='.$parameter.'&';
+        }
+        return $returnUrl;
     }
 }

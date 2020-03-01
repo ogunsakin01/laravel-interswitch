@@ -9,7 +9,7 @@ return [
 
     'env' => env('INTERSWITCH_ENV', 'TEST'),
 
-    'currencCode' => 566,
+    'currency' => 566,
 
     /**
      *  Interswitch payment gateway of choice
@@ -18,6 +18,28 @@ return [
      */
 
     'gateway' => env('INTERSWITCH_GATEWAY'),
+
+    /**
+     *  Redirect URL
+     *  This is the URL Interswitch redirects you to
+     *  **PLEASE DO NOT CHANGE**  `The cost of using magic will be your soul`
+     */
+
+    'systemRedirectUrl' => 'interswitch-pay-redirect',
+
+
+    /**
+     *  This is the redirect url defined by you in your environment file
+     *
+     */
+
+    'redirectUrl' => env('INTERSWITCH_REDIRECT_URL'),
+
+    /**
+     *  Live credentials as defined in your environment variables
+     *
+     */
+
 
     'live' => [
         'requestUrl' => env('INTERSWITCH_REQUEST_URL'),
