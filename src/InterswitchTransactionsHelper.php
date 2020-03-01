@@ -90,7 +90,7 @@ class interswitchTransactionsHelper
         return hash('SHA512', $hashString);
     }
 
-    protected function rebuildRedirectUrl(array $parameters){
+    public function rebuildRedirectUrl(array $parameters): string{
         $returnUrl = $this->redirectUrl.'?';
         foreach($parameters as $key => $parameter){
           $returnUrl = $returnUrl.$key.'='.$parameter.'&';

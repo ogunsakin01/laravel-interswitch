@@ -26,8 +26,8 @@ class InterswitchController extends Controller
         $response = [
             'reference' => $_POST['txnref'],
             'amount' => $_POST['amount'],
-            'response_code' => $_POST['amount'],
-            'response_description' => $_POST['amount']
+            'response_code' => $_POST['resp'],
+            'response_description' => $_POST['desc']
         ];
         $payment = InterswitchPayment::where('reference',$response['reference'])->first();
         $payment->response_code = $response['response_code'];
@@ -37,12 +37,12 @@ class InterswitchController extends Controller
             Mail::to($payment->customer_email)->send(new PaymentSuccessful($payment));
         }
         Mail::to($payment->customer_email)->send(new PaymentFailed($payment));
-        $redirectUrl = Interswitch::rebuildRedirectUrl($payment->array());
+        $redirectUrl = Interswitch::rebuildRedirectUrl($payment->toArray());
         return redirect($redirectUrl);
     }
 
-    public function transactionLogs(){
-        if($_GET['email'] !== ''){
+    public function transactionsLog(){
+        if(isset($_GET['email']) && $_GET['email'] !== ''){
             $transactions = InterswitchPayment::where('customer_email',$_GET['customer_email'])
                 ->orderBy('created_at','desc')
                 ->get();
@@ -50,7 +50,7 @@ class InterswitchController extends Controller
             $transactions = InterswitchPayment::orderBy('created_at','desc')
                 ->get();
         }
-        return view('Interswitch::logs', get_defined_vars());
+        return view('Interswitch::transactions_log', get_defined_vars());
     }
 
     public function confirm(Request $request){
