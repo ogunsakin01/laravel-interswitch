@@ -1,10 +1,5 @@
 <?php
-
-
 namespace OgunsakinDamilola\Interswitch;
-
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Str;
 
 class InterswitchTransactionsHelper
 {
@@ -24,46 +19,47 @@ class InterswitchTransactionsHelper
 
     protected $queryUrl;
 
+    protected $currency;
+
     public function __construct()
     {
-        $this->env = Config::get('interswitch.env');
-        $this->gateway = Config::get('interswitch.gateway');
-        $this->redirectUrl = Config::get('interswitch.redirectUrl');
+        dd(config('interswitch.env'));
+        $this->env = config('interswitch.env');
+        $this->gateway = config('interswitch.gateway');
+        $this->redirectUrl = config('interswitch.redirectUrl');
+        $this->currency = config('Interswitch.currency');
         $this->environmentHandler();
     }
 
     protected function testEnvironmentHandler(): void
     {
         if ($this->gateway === 'PAYDIRECT'):
-            $this->itemId = Config::get('interswitch.test.payDirect.itemId');
-            $this->productId = Config::get('interswitch.test.payDirect.productId');
-            $this->macKey = Config::get('interswitch.test.payDirect.macKey');
-            $this->queryUrl = Config::get('interswitch.test.payDirect.queryUrl');
-            $this->requestUrl = Config::get('interswitch.test.payDirect.requestUrl');
+            $this->itemId = config('interswitch.test.payDirect.itemId');
+            $this->productId = config('interswitch.test.payDirect.productId');
+            $this->macKey = config('interswitch.test.payDirect.macKey');
+            $this->queryUrl = config('interswitch.test.payDirect.queryUrl');
+            $this->requestUrl = config('interswitch.test.payDirect.requestUrl');
         elseif ($this->gateway === 'WEBPAY'):
-            $this->itemId = Config::get('interswitch.test.webPay.itemId');
-            $this->productId = Config::get('interswitch.test.webPay.productId');
-            $this->macKey = Config::get('interswitch.test.webPay.macKey');
-            $this->queryUrl = Config::get('interswitch.test.webPay.queryUrl');
-            $this->requestUrl = Config::get('interswitch.test.webPay.requestUrl');
+            $this->itemId = config('interswitch.test.webPay.itemId');
+            $this->productId = config('interswitch.test.webPay.productId');
+            $this->macKey = config('interswitch.test.webPay.macKey');
+            $this->queryUrl = config('interswitch.test.webPay.queryUrl');
+            $this->requestUrl = config('interswitch.test.webPay.requestUrl');
         endif;
     }
 
     protected function liveEnvironmentHandler(): void
     {
-        $this->itemId = Config::get('interswitch.live.itemId');
-        $this->productId = Config::get('interswitch.live.productId');
-        $this->macKey = Config::get('interswitch.live.macKey');
-        $this->queryUrl = Config::get('interswitch.live.queryUrl');
-        $this->requestUrl = Config::get('interswitch.live.requestUrl');
+        $this->itemId = config('interswitch.live.itemId');
+        $this->productId = config('interswitch.live.productId');
+        $this->macKey = config('interswitch.live.macKey');
+        $this->queryUrl = config('interswitch.live.queryUrl');
+        $this->requestUrl = config('interswitch.live.requestUrl');
     }
 
     protected function environmentHandler(): void
     {
         switch ($this->env) {
-            case 'Test':
-                $this->testEnvironmentHandler();
-                break;
             case 'LIVE':
                 $this->liveEnvironmentHandler();
                 break;
@@ -75,7 +71,7 @@ class InterswitchTransactionsHelper
     protected function transactionReferenceHandler($reference = ''): string
     {
         if ($reference == ''):
-            return strtoupper(Str::random(9));
+            return strtoupper(uniqid());
         endif;
         return $reference;
     }

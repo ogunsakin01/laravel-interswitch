@@ -17,6 +17,7 @@ class CreateInterswitchPaymentsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('customer_id');
             $table->string('customer_name');
+            $table->string('customer_email');
             $table->string('environment');
             $table->string('gateway');
             $table->string('reference');

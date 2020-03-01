@@ -2,17 +2,18 @@
 namespace  OgunsakinDamilola\Interswitch;
 
 use Illuminate\Support\ServiceProvider;
-use OgunsakinDamilola\Interswitch\Interswitch;
 
 class InterswitchServiceProvider extends ServiceProvider {
 
     public function boot(){
-        $config = realpath(__DIR__ . '/resources/config/interswitch.php');
+        $config = realpath(__DIR__ . '/config/interswitch.php');
 
         $this->publishes([
             $config => config_path('interswitch.php')
         ]);
-        $this->loadMigrationsFrom(__DIR__.'/Database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/databases/migrations');
+        $this->loadViewsFrom(__DIR__.'/resources/views', 'Interswitch');
+        $this->loadRoutesFrom(__DIR__.'/routes/web.php');
     }
 
     public function register(){
