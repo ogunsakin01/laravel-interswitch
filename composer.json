@@ -1,7 +1,6 @@
 {
     "name": "ogunsakindamilola/laravel-interswitch",
     "description": "A laravel package for Interswitch",
-    "type": "composer-plugin",
     "license": "MIT",
     "authors": [
         {
