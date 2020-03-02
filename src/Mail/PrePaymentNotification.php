@@ -30,6 +30,6 @@ class PrePaymentNotification extends Mailable
     public function build()
     {
         return $this->subject('Payment Notification')
-        ->markdown('Interswitch::emails.PrePaymentNotification');
+        ->markdown('interswitch.emails.PrePaymentNotification');
     }
 }

@@ -8,8 +8,11 @@ class InterswitchServiceProvider extends ServiceProvider {
     public function boot(){
 
         $this->publishes([
-            __DIR__ . '/config/interswitch.php' => config_path('interswitch.php')
+            __DIR__ . '/config/interswitch.php' => config_path('interswitch.php'),
+            __DIR__ . '/resources/views/emails' => resource_path('views/interswitch/emails'),
+            __DIR__ . '/resources/views/transactions_log.blade.php' => resource_path('views/interswitch/transactions_log.blade.php')
         ]);
+
         $this->mergeConfigFrom(
             __DIR__.'/config/interswitch.php', 'interswitch'
         );

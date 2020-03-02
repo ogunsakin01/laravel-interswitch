@@ -50,7 +50,7 @@ class InterswitchController extends Controller
             $transactions = InterswitchPayment::orderBy('created_at','desc')
                 ->get();
         }
-        return view('Interswitch::transactions_log', get_defined_vars());
+        return view('interswitch.transactions_log', get_defined_vars());
     }
 
     public function confirm(Request $request){
