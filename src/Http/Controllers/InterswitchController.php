@@ -16,18 +16,18 @@ class InterswitchController extends Controller
            'customer_id' => 'required',
            'customer_email' => 'required|email',
            'amount' => 'required|numeric|gt:0',
-           'reference' => 'sometimes|unique:interswitch_payments,reference'
+           'reference' => 'sometimes|min:6|unique:interswitch_payments,reference'
        ]);
        $paymentData = Interswitch::generatePayment($request->all());
        return view('Interswitch::pay', compact('paymentData'));
     }
 
-    public function redirect(){
+    public function redirect(Request $request){
         $response = [
-            'reference' => $_POST['txnref'],
-            'amount' => $_POST['amount'],
-            'response_code' => $_POST['resp'],
-            'response_description' => $_POST['desc']
+            'reference' => $request->txnref,
+            'amount' => $request->amount,
+            'response_code' => $request->resp,
+            'response_description' => $request->desc
         ];
         $payment = InterswitchPayment::where('reference',$response['reference'])->first();
         $payment->response_code = $response['response_code'];
@@ -41,8 +41,8 @@ class InterswitchController extends Controller
         return redirect($redirectUrl);
     }
 
-    public function transactionsLog(){
-        if(isset($_GET['email']) && $_GET['email'] !== ''){
+    public function transactionsLog(Request $request){
+        if(isset($request->email) && $request->email !== '' && !is_null($request->email)){
             $transactions = InterswitchPayment::where('customer_email',$_GET['customer_email'])
                 ->orderBy('created_at','desc')
                 ->get();
