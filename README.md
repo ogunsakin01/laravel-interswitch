@@ -176,6 +176,7 @@ Don't worry, I know exactly how it feels. Well, on this package, all you have to
   <button type="Submit">Pay</button>
 </form>
 ```
+If you wish to use a transaction reference defined by you, simply add `<input type="hidden" name="reference" value="87YYUIJIJ" />` to the filed you are sending .
 
 That's it, when the pay button is clicked, all the dirty work is done for you behind the scene. When the payment is complete, you will be redirected to the `INTERSWITCH_REDIRECT_URL=` you set in your .env with the following query parameters 
 ````php
@@ -202,9 +203,9 @@ OR
 route('InterswitchTransactionsLog');
 ```
 
-That's it, everything is done for. You are good to go.
+That's it, you are good to go
 
-## Now that you here
+## Now that you are here
 Thank you for taking your time with my package. 
 
 Be generous with you stars and don't forget to follow me on IG and Twitter 
