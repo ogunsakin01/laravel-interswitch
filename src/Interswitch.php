@@ -13,7 +13,7 @@ class Interswitch extends InterswitchTransactionsHelper
     public function generatePayment($paymentData): array
     {
         $amount = $paymentData['amount'] * 100;
-        $reference = $this->transactionReferenceHandler(Arr::has($paymentData, 'reference', ''));
+        $reference = $this->transactionReferenceHandler(Arr::get($paymentData, 'reference', ''));
         $hash = $this->initializeTransactionHash($reference, $amount);
         $payment = [
             'customer_id' => $paymentData['customer_id'],
