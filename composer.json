@@ -9,12 +9,6 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {
-        "php": "^7.2",
-        "guzzlehttp/guzzle": "^6.5",
-        "illuminate/support": "^6.17",
-        "illuminate/mail": "^6.17"
-    },
     "autoload": {
         "psr-4": {
             "OgunsakinDamilola\\Interswitch\\": "src/"
