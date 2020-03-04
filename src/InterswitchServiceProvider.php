@@ -3,7 +3,7 @@ namespace  OgunsakinDamilola\Interswitch;
 
 use Illuminate\Support\ServiceProvider;
 
-class InterswitchServiceProvider extends ServiceProvider {
+class InterswitchServiceProvider extends ServiceProvider{
 
     public function boot(){
 

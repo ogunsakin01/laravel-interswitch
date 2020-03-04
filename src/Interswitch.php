@@ -4,8 +4,6 @@
 namespace OgunsakinDamilola\Interswitch;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Mail;
-use OgunsakinDamilola\Interswitch\Mail\PrePaymentNotification;
 use OgunsakinDamilola\Interswitch\Models\InterswitchPayment;
 
 class Interswitch extends InterswitchTransactionsHelper
@@ -28,7 +26,7 @@ class Interswitch extends InterswitchTransactionsHelper
             'payment_status' => 0,
             'response_full' => ''
         ];
-        Mail::to($paymentData['customer_email'])->send(new PrePaymentNotification($payment));
+        InterswitchMailHandler::newPaymentNotification($paymentData['customer_email'],$payment);
         InterswitchPayment::create($payment);
         return [
             'customerId' => $paymentData['customer_id'],

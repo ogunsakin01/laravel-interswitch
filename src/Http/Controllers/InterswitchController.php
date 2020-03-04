@@ -2,10 +2,8 @@
 namespace OgunsakinDamilola\Interswitch\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use OgunsakinDamilola\Interswitch\Facades\Interswitch;
-use OgunsakinDamilola\Interswitch\Mail\PaymentFailed;
-use OgunsakinDamilola\Interswitch\Mail\PaymentSuccessful;
+use OgunsakinDamilola\Interswitch\InterswitchMailHandler;
 use OgunsakinDamilola\Interswitch\Models\InterswitchPayment;
 
 class InterswitchController extends Controller
@@ -33,11 +31,7 @@ class InterswitchController extends Controller
         $payment->response_code = $response['response_code'];
         $payment->response_description = $response['response_description'];
         $payment->update();
-        if(in_array($response['response_code'],['00','01','11','10'])){
-            Mail::to($payment->customer_email)->send(new PaymentSuccessful($payment));
-        }else{
-            Mail::to($payment->customer_email)->send(new PaymentFailed($payment));
-        }
+        InterswitchMailHandler::paymentNotification($payment->customer_email,$payment->toArray());
         $redirectUrl = Interswitch::rebuildRedirectUrl($payment->toArray());
         return redirect($redirectUrl);
     }
