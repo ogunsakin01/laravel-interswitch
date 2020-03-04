@@ -35,8 +35,9 @@ class InterswitchController extends Controller
         $payment->update();
         if(in_array($response['response_code'],['00','01','11','10'])){
             Mail::to($payment->customer_email)->send(new PaymentSuccessful($payment));
+        }else{
+            Mail::to($payment->customer_email)->send(new PaymentFailed($payment));
         }
-        Mail::to($payment->customer_email)->send(new PaymentFailed($payment));
         $redirectUrl = Interswitch::rebuildRedirectUrl($payment->toArray());
         return redirect($redirectUrl);
     }
