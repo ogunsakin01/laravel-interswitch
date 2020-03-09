@@ -26,7 +26,7 @@ class Interswitch extends InterswitchTransactionsHelper
             'payment_status' => 0,
             'response_full' => ''
         ];
-        InterswitchMailHandler::newPaymentNotification($paymentData['customer_email'],$payment);
+        InterswitchMailHandler::newPaymentNotification($paymentData['customer_email'], $payment);
         InterswitchPayment::create($payment);
         return [
             'customerId' => $paymentData['customer_id'],
@@ -43,8 +43,38 @@ class Interswitch extends InterswitchTransactionsHelper
         ];
     }
 
-    public function queryTransaction($reference)
+    public function queryTransaction($reference, $amount): array
     {
+        $headers = [
+            "Hash:" . $this->queryTransactionHash($reference)
+        ];
+        $url = $this->queryUrl . '?productid=' . $this->productId . '&transactionreference=' . $reference . '&amount=' . $amount;
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 120);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        return $this->queryValidator($reference, $amount, $response);
+    }
+
+    private function queryValidator($reference, $amount, $response): array
+    {
+        if (empty($response)) {
+            return [
+                'reference' => $reference,
+                'response_code' => '--',
+                'response_description' => 'Could not confirm payment status. Bad Internet Connection',
+                'amount' => $amount
+            ];
+        }
+        $response = json_decode($response, true);
+        return [
+            'reference' => $reference,
+            'response_code' => $response['ResponseCode'],
+            'response_description' => $response['ResponseDescription'],
+            'amount' => $amount
+        ];
 
     }
 }
