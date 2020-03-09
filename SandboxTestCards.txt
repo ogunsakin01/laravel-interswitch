@@ -1,0 +1,41 @@
+Successful transactions 
+6280511000000095  
+Dec 2026  
+0000  
+123
+
+
+Insufficient Fund
+5061030000000000027
+Sept 2019
+1234
+123
+
+
+No card Record (masked as Invalid card number on webpay)
+5061030000000000043
+Oct 2018 
+1234
+123 
+
+        
+Exceeds Withdrawal Limit
+5061030000000000068
+Sept 2019 
+1234
+123   
+
+       
+Incorrect PIN
+5061030000000000035
+Sept 2019
+0000
+123
+
+
+Refer to Card Issuer - (masked as Transaction error on webpay)
+5061030000000000050
+Sept 2019 
+1234 
+123       
+
