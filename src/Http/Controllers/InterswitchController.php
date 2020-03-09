@@ -37,9 +37,10 @@ class InterswitchController extends Controller
             'response_code' => $request->resp,
             'response_description' => $request->desc
         ];
+        $confirmPayment = Interswitch::queryTransaction($response['reference'], $response['amount']);
         $payment = InterswitchPayment::where('reference',$response['reference'])->first();
-        $payment->response_code = $response['response_code'];
-        $payment->response_description = $response['response_description'];
+        $payment->response_code = $confirmPayment['response_code'];
+        $payment->response_description = $confirmPayment['response_description'];
         $payment->update();
         InterswitchMailHandler::paymentNotification($payment->customer_email,$payment->toArray());
         $redirectUrl = Interswitch::rebuildRedirectUrl($payment->toArray());
