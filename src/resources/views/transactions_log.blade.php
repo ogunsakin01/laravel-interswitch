@@ -57,7 +57,7 @@
                                 <td class="response_description_{{$transaction->reference}}">{{$transaction->response_description}}</td>
                                 <td>{{date('d, D M Y', strtotime($transaction->created_at))}}</td>
                                 <td>
-                                    <button value="{{$transaction->reference}}" type="button" class="btn btn-sm btn-primary requery">
+                                    <button value="{{$transaction->reference}}" @if(config('interswitch.env') == 'LIVE' && $transaction->environment == 'TEST') disabled @endif type="button" class="btn btn-sm btn-primary requery">
                                         Requery
                                     </button>
                                 </td>
