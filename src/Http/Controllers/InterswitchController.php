@@ -52,7 +52,7 @@ class InterswitchController extends Controller
     */
     public function transactionsLog(Request $request){
         if(isset($request->email) && $request->email !== '' && !is_null($request->email)){
-            $transactions = InterswitchPayment::where('customer_email',$_GET['customer_email'])
+            $transactions = InterswitchPayment::where('customer_email',$request->email)
                 ->orderBy('created_at','desc')
                 ->get();
         }else{
