@@ -4,6 +4,7 @@
 namespace OgunsakinDamilola\Interswitch;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Http;
 use OgunsakinDamilola\Interswitch\Models\InterswitchPayment;
 
 class Interswitch extends InterswitchTransactionsHelper
@@ -49,6 +50,7 @@ class Interswitch extends InterswitchTransactionsHelper
             "Hash:" . $this->queryTransactionHash($reference)
         ];
         $url = $this->queryUrl . '?productid=' . $this->productId . '&transactionreference=' . $reference . '&amount=' . $amount;
+        $response = Http::get($url);
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);

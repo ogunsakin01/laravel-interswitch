@@ -30,6 +30,6 @@ class PaymentSuccessful extends Mailable
     public function build()
     {
         return $this->subject('Payment Successful')
-        ->markdown('interswitch.emails.PaymentSuccessful');
+        ->markdown('interswitch.emails.payment_successful_notification');
     }
 }

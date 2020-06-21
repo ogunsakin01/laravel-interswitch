@@ -16,7 +16,7 @@ class InterswitchMailHandler
         try {
             Mail::to($email)->send(new PrePaymentNotification($paymentData));
         } catch (\Exception $e) {
-            // dd($e->getMessage());
+            \Log::error($e);
         }
     }
 
@@ -29,7 +29,7 @@ class InterswitchMailHandler
                 Mail::to($email)->send(new PaymentSuccessful($paymentData));
             }
         } catch (\Exception $e){
-            // dd($e->getMessage());
+            \Log::error($e);
         }
     }
 

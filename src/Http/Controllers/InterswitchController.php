@@ -12,7 +12,11 @@ class InterswitchController extends Controller
     /**
      *  This method helps to generate the payment configuration before redirecting to the Interswitch payment page
      *  The view `Interswitch::pay` handles the traditional Interswitch post which in turns redirect to the actual Interswitch payment page
-     * */
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function pay(Request $request){
        $this->validate($request, [
            'customer_name' => 'required|string',
@@ -28,8 +32,10 @@ class InterswitchController extends Controller
     /**
      * The point of reentry back into the application from Interswitch payment page
      *
+     * @param Request $request
      * @return Redirects to the redirect URl defined by the package user with the transaction details as GET variables
-     * **/
+     */
+
     public function redirect(Request $request){
         $response = [
             'reference' => $request->txnref,
@@ -48,8 +54,11 @@ class InterswitchController extends Controller
     }
 
     /**
-    * Returns the transaction logs view
-    */
+     * Returns the transaction logs view
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
+
     public function transactionsLog(Request $request){
         if(isset($request->email) && $request->email !== '' && !is_null($request->email)){
             $transactions = InterswitchPayment::where('customer_email',$request->email)
@@ -62,6 +71,12 @@ class InterswitchController extends Controller
         return view('interswitch.transactions_log', get_defined_vars());
     }
 
+    /**
+     * Handle transaction confirmation requests
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function confirmPayment(Request $request){
         $validator = Validator::make($request->all(),[
             'reference' => 'required|string|exists:interswitch_payments,reference'

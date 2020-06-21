@@ -1,6 +1,7 @@
 <?php
 namespace OgunsakinDamilola\interswitch;
 
+use Illuminate\Support\Facades\Config;
 class interswitchTransactionsHelper
 {
     protected $env;
@@ -93,7 +94,7 @@ class interswitchTransactionsHelper
     public function rebuildRedirectUrl(array $parameters): string{
         $returnUrl = $this->redirectUrl.'?';
         foreach($parameters as $key => $parameter){
-          $returnUrl = $returnUrl.$key.'='.$parameter.'&';
+            $returnUrl = $returnUrl.$key.'='.$parameter.'&';
         }
         return $returnUrl;
     }

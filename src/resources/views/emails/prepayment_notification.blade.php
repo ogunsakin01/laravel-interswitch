@@ -2,7 +2,7 @@
 
 # Hi {{$payment['customer_name']}},
 
-You are about to make a payment on our platform. Find your payment reference below
+You are about to make a payment on {{config('app.name')}}. Find your payment reference below
 @component('mail::panel')
 <div align="left" style="align-items: self-start">
 <b>Payment Reference:</b> {{ $payment['reference']}}<br/>

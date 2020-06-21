@@ -30,7 +30,6 @@ return [
 
     /**
      *  This is the redirect url defined by you in your environment file
-     *
      */
 
     'redirectUrl' => env('INTERSWITCH_REDIRECT_URL'),
@@ -39,7 +38,6 @@ return [
      *  Live credentials as defined in your environment variables
      *
      */
-
 
     'live' => [
         'requestUrl' => env('INTERSWITCH_REQUEST_URL'),
@@ -65,7 +63,7 @@ return [
         'payDirect' => [
             'requestUrl' => 'https://sandbox.interswitchng.com/collections/w/pay',
             'queryUrl' => 'https://sandbox.interswitchng.com/collections/api/v1/gettransaction.json',
-            'macKey' => '',
+            'macKey' => 'E187B1191265B18338B5DEBAF9F38FEC37B170FF582D4666DAB1F098304D5EE7F3BE15540461FE92F1D40332FDBBA34579034EE2AC78B1A1B8D9A321974025C4',
             'itemId' => 101,
             'productId' => 1706,
         ],

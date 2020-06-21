@@ -12,10 +12,6 @@ class InterswitchServiceProvider extends ServiceProvider{
             __DIR__ . '/resources/views/emails' => resource_path('views/interswitch/emails'),
             __DIR__ . '/resources/views/transactions_log.blade.php' => resource_path('views/interswitch/transactions_log.blade.php')
         ]);
-
-        $this->mergeConfigFrom(
-            __DIR__.'/config/interswitch.php', 'interswitch'
-        );
         $this->loadMigrationsFrom(__DIR__.'/databases/migrations');
         $this->loadViewsFrom(__DIR__.'/resources/views', 'Interswitch');
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');

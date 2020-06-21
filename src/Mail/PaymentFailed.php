@@ -30,6 +30,6 @@ class PaymentFailed extends Mailable
     public function build()
     {
         return $this->subject('Payment Failed')
-        ->markdown('interswitch.emails.PaymentFailed');
+        ->markdown('interswitch.emails.payment_failed_notification');
     }
 }
