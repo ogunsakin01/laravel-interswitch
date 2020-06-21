@@ -37,14 +37,12 @@ class InterswitchController extends Controller
      */
 
     public function redirect(Request $request){
+        $payment = InterswitchPayment::where('reference', $request->txnref)->first();
         $response = [
-            'reference' => $request->txnref,
-            'amount' => $request->amount,
-            'response_code' => $request->resp,
-            'response_description' => $request->desc
+            'reference' => $payment->reference,
+            'amount' => $payment->amount,
         ];
         $confirmPayment = Interswitch::queryTransaction($response['reference'], $response['amount']);
-        $payment = InterswitchPayment::where('reference',$response['reference'])->first();
         $payment->response_code = $confirmPayment['response_code'];
         $payment->response_description = $confirmPayment['response_description'];
         $payment->update();
