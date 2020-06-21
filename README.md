@@ -113,7 +113,7 @@ return [
 Open your .env file and add the following 
 
 ```dotenv
-INTERSWITCH_ENV=TEST
+INTERSWITCH_ENV=TEST  
 INTERSWITCH_GATEWAY=WEBPAY
 INTERSWITCH_REDIRECT_URL=http://localhost:8000/payment-confirmation/
 INTERSWITCH_REQUEST_URL=
@@ -123,9 +123,11 @@ INTERSWITCH_ITEM_ID=
 INTERSWITCH_PRODUCT_ID=
 ````
 `INTERSWITCH_ENV=` can be set to either `LIVE` or `TEST`.
-`INTERSWITCH_GATEWAY=` can be set tot either `WEBPAY` or `PAYDIRECT`.
-The redirect URL must be a get url declared in your route where you  wish to redirect to when a payment process is complete.
-Make sure this route is defined in your web.php as a `GET` route. Make sure to replace the other env variables withe the details you received from Interswitch.
+`INTERSWITCH_GATEWAY=` can be set to either `WEBPAY` or `PAYDIRECT`. 
+> Currently PAYDIRECT does not work on test mode, please always test with WEBPAY. Your PAYDIRECT credentials will work on live as long as your implementation and testing with WEBPAY is accurate
+
+The `INTERSWITCH_REDIRECT_URL` must be a `GET` route declared in your route where you  wish to redirect to when a payment process is complete.
+Make sure this route is defined in your web.php as a `GET` route. Make sure to replace the other env variables withe the details you received from Interswitch when going live.
 
 While still in your env file, make sure you set up your database environment
 ```dotenv
