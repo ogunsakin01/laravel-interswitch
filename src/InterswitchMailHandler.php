@@ -1,6 +1,4 @@
 <?php
-
-
 namespace OgunsakinDamilola\Interswitch;
 
 
@@ -11,16 +9,16 @@ use OgunsakinDamilola\Interswitch\Mail\PrePaymentNotification;
 
 class InterswitchMailHandler
 {
-    public static function newPaymentNotification(string $email, array $paymentData): void
+    public static function newPaymentNotification($email, $paymentData)
     {
         try {
             Mail::to($email)->send(new PrePaymentNotification($paymentData));
         } catch (\Exception $e) {
-            // dd($e->getMessage());
+            abort(500, $e->getMessage());
         }
     }
 
-    public static function paymentNotification(string $email, array $paymentData): void
+    public static function paymentNotification($email, $paymentData)
     {
         try {
             if (! in_array($paymentData['response_code'], ['00', '01', '11', '10'])) {
@@ -29,7 +27,7 @@ class InterswitchMailHandler
                 Mail::to($email)->send(new PaymentSuccessful($paymentData));
             }
         } catch (\Exception $e){
-            // dd($e->getMessage());
+            abort(500, $e->getMessage());
         }
     }
 

@@ -1,6 +1,4 @@
 <?php
-
-
 namespace OgunsakinDamilola\Interswitch;
 
 use Illuminate\Support\Arr;
@@ -8,7 +6,7 @@ use OgunsakinDamilola\Interswitch\Models\InterswitchPayment;
 
 class Interswitch extends InterswitchTransactionsHelper
 {
-    public function generatePayment($paymentData): array
+    public function generatePayment($paymentData)
     {
         $amount = $paymentData['amount'] * 100;
         $reference = $this->transactionReferenceHandler(Arr::get($paymentData, 'reference', ''));
@@ -27,7 +25,7 @@ class Interswitch extends InterswitchTransactionsHelper
             'response_full' => ''
         ];
         InterswitchMailHandler::newPaymentNotification($paymentData['customer_email'], $payment);
-        InterswitchPayment::create($payment);
+        InterswitchPayment::query()->create($payment);
         return [
             'customerId' => $paymentData['customer_id'],
             'customerName' => $paymentData['customer_name'],

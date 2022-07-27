@@ -1,5 +1,5 @@
 <?php
-namespace OgunsakinDamilola\interswitch;
+namespace OgunsakinDamilola\Interswitch;
 
 class interswitchTransactionsHelper
 {
