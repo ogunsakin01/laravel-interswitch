@@ -8,7 +8,7 @@ BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS `interswitch_payment`;
 
-CREATE TABLE `subscription_payments` (
+CREATE TABLE `interswitch_payments` (
 `id` INTEGER  NOT NULL ,
 `created_at` timestamp NULL DEFAULT NULL,
 `updated_at` timestamp NULL DEFAULT NULL,
@@ -20,12 +20,10 @@ CREATE TABLE `subscription_payments` (
 `reference` TEXT  NOT NULL,
 `amount` TEXT  NOT NULL,
 `response_code` TEXT  NOT NULL,
-`response_description` TEXT  NULL DEFAULT NULLL,
+`response_description` TEXT  NULL DEFAULT NULL,
 `response_full` TEXT  NULL DEFAULT NULL,
 `payment_status` TEXT  NULL DEFAULT NULL,
-
-
-PRIMARY KEY (`id`),
+PRIMARY KEY (`id`)
 );
 
 

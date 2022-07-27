@@ -3,7 +3,7 @@ namespace OgunsakinDamilola\Interswitch\Tests\Unit;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use OgunsakinDamilola\Interswitch\Models\InterswitchPayment;
-use OgunsakinDamilola\Interswitch\TestCase;
+use OgunsakinDamilola\Interswitch\Tests\TestCase;
 
 class InterswitchPaymentModelTest extends TestCase
 {

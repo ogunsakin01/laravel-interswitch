@@ -11,7 +11,7 @@ class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        $this->app->make(EloquentFactory::class)->load(__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'database'.DIRECTORY_SEPARATOR.'factories');
+        $this->app->make(EloquentFactory::class)->load($this->baseDir().DIRECTORY_SEPARATOR.'database'.DIRECTORY_SEPARATOR.'factories');
 
     }
 
@@ -24,8 +24,12 @@ class TestCase extends BaseTestCase
 
     protected function getEnvironmentSetUp($app)
     {
-        include_once __DIR__.'/../database/setup_default_tables_2022.php';
+        include_once $this->baseDir().DIRECTORY_SEPARATOR.'database'.DIRECTORY_SEPARATOR.'setup_default_tables_2022.php';
 
         (new \SetupDefaultTables2022)->up();
+    }
+
+    private function baseDir(){
+        return str_replace('tests','src',__DIR__);
     }
 }

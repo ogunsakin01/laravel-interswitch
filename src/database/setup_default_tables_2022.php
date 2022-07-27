@@ -10,7 +10,7 @@ class SetupDefaultTables2022 extends Migration
     public function up()
     {
         if (!Schema::hasTable('interswitch_payments')) {
-            DB::unprepared(file_get_contents('database/database.sqlite'));
+            DB::unprepared(file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'database.sqlite'));
         }
     }
 

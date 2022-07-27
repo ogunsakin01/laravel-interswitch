@@ -21,7 +21,8 @@
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "OgunsakinDamilola\\Interswitch\\": "src/"
+            "OgunsakinDamilola\\Interswitch\\": "src/",
+            "OgunsakinDamilola\\Interswitch\\Tests\\": "tests/"
         }
     },
     "extra": {
