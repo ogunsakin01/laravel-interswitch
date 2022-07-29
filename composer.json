@@ -8,10 +8,21 @@
             "email": "ogunsakin191@gmail.com"
         }
     ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "illuminate/support": "^8.0",
+        "doctrine/dbal": "^2.10",
+        "laravel/legacy-factories": "^1.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0",
+        "orchestra/testbench": "^6.21"
+    },
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "OgunsakinDamilola\\Interswitch\\": "src/"
+            "OgunsakinDamilola\\Interswitch\\": "src/",
+            "OgunsakinDamilola\\Interswitch\\Tests\\": "tests/"
         }
     },
     "extra": {

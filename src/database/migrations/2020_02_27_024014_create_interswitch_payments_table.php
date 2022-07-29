@@ -24,6 +24,8 @@ class CreateInterswitchPaymentsTable extends Migration
             $table->bigInteger('amount'); // always store in kobo
             $table->string('response_code')->nullable();
             $table->string('response_description')->nullable();
+            $table->longText('response_full')->nullable();
+            $table->integer('payment_status')->nullable();
             $table->timestamps();
         });
     }
