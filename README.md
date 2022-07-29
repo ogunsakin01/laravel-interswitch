@@ -9,7 +9,7 @@ A laravel package for Interswitch
 
 ## Installation
 
-[PHP](https://php.net) 7.2+, and [Composer](https://getcomposer.org) are required.
+[PHP](https://php.net) ^7.4|^8.0, and [Composer](https://getcomposer.org) are required.
 
 To get the latest version of Laravel Interswitch, simply require it
 
@@ -17,13 +17,6 @@ To get the latest version of Laravel Interswitch, simply require it
 composer require ogunsakindamilola/laravel-interswitch
 ```
 
-Or add the following line to the require block of your `composer.json` file.
-
-```json
-"ogunsakindamilola/laravel-interswitch": "dev-master"
-```
-
-You'll then need to run `composer install` or `composer update` to download it and have the autoloader updated.
 ## Configuration
 
 You can publish the configuration file using this command:
