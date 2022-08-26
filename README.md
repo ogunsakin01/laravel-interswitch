@@ -4,6 +4,7 @@
 [![Latest Stable Version](https://poser.pugx.org/ogunsakindamilola/laravel-interswitch/v/stable.svg)](https://packagist.org/packages/ogunsakindamilola/laravel-interswitch)
 [![License](https://poser.pugx.org/ogunsakindamilola/laravel-interswitch/license.svg)](LICENSE.md)
 [![Total Downloads](https://img.shields.io/packagist/dt/ogunsakindamilola/laravel-interswitch.svg?style=flat-square)](https://packagist.org/packages/ogunsakindamilola/laravel-interswitch)
+![GitHub Actions](https://github.com/ogunsakindamilola/laravel-interswitch/actions/workflows/master.yml/badge.svg)
 
 A laravel package for Interswitch
 

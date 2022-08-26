@@ -41,7 +41,7 @@ class Interswitch extends InterswitchTransactionsHelper
         ];
     }
 
-    public function queryTransaction($reference, $amount): array
+    public function queryTransaction($reference, $amount)
     {
         $headers = [
             "Hash:" . $this->queryTransactionHash($reference)
@@ -56,7 +56,7 @@ class Interswitch extends InterswitchTransactionsHelper
         return $this->queryValidator($reference, $amount, $response);
     }
 
-    private function queryValidator($reference, $amount, $response): array
+    private function queryValidator($reference, $amount, $response)
     {
         if (empty($response)) {
             return [
