@@ -203,5 +203,6 @@ That's it, you are good to go
 Thank you for taking your time with my package. 
 
 Be generous with you stars and don't forget to follow me on IG and Twitter 
-@he_is_unique
+
+[@he_is_unique](https://twitter.com/he_is_unique)
 
