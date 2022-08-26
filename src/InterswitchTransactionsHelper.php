@@ -33,7 +33,7 @@ class interswitchTransactionsHelper
         $this->environmentHandler();
     }
 
-    protected function testEnvironmentHandler(): void
+    protected function testEnvironmentHandler()
     {
         if ($this->gateway === 'PAYDIRECT'):
             $this->itemId = config('interswitch.test.payDirect.itemId');
@@ -50,7 +50,7 @@ class interswitchTransactionsHelper
         endif;
     }
 
-    protected function liveEnvironmentHandler(): void
+    protected function liveEnvironmentHandler()
     {
         $this->itemId = config('interswitch.live.itemId');
         $this->productId = config('interswitch.live.productId');
@@ -59,7 +59,7 @@ class interswitchTransactionsHelper
         $this->requestUrl = config('interswitch.live.requestUrl');
     }
 
-    protected function environmentHandler(): void
+    protected function environmentHandler()
     {
         switch ($this->env) {
             case 'LIVE':
@@ -70,7 +70,7 @@ class interswitchTransactionsHelper
         }
     }
 
-    protected function transactionReferenceHandler($reference = ''): string
+    protected function transactionReferenceHandler($reference = '')
     {
         if ($reference == ''):
             return strtoupper(uniqid());
@@ -78,19 +78,20 @@ class interswitchTransactionsHelper
         return $reference;
     }
 
-    protected function initializeTransactionHash($reference, $amount): string
+    protected function initializeTransactionHash($reference, $amount)
     {
         $hashString = $reference . $this->productId . $this->itemId . $amount . $this->systemRedirectUrl . $this->macKey;
         return hash('SHA512', $hashString);
     }
 
-    protected function queryTransactionHash($reference): string
+    protected function queryTransactionHash($reference)
     {
         $hashString = $this->productId . $reference . $this->macKey;
         return hash('SHA512', $hashString);
     }
 
-    public function rebuildRedirectUrl(array $parameters): string{
+    public function rebuildRedirectUrl(array $parameters)
+{
         $returnUrl = $this->redirectUrl.'?';
         foreach($parameters as $key => $parameter){
           $returnUrl = $returnUrl.$key.'='.$parameter.'&';

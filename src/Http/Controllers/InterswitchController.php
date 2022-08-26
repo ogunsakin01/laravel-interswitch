@@ -1,7 +1,7 @@
 <?php
 namespace OgunsakinDamilola\Interswitch\Http\Controllers;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
 use OgunsakinDamilola\Interswitch\Facades\Interswitch;
 use OgunsakinDamilola\Interswitch\InterswitchMailHandler;

@@ -1,18 +1,21 @@
 <?php
+
 namespace OgunsakinDamilola\Interswitch\Tests;
 
+use Orchestra\Testbench\TestCase as BaseTestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 use OgunsakinDamilola\Interswitch\InterswitchServiceProvider;
-use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
+    use RefreshDatabase;
+
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->app->make(EloquentFactory::class)->load($this->baseDir().DIRECTORY_SEPARATOR.'database'.DIRECTORY_SEPARATOR.'factories');
-
+        $this->app->make(EloquentFactory::class)->load($this->baseDir() . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'factories');
     }
 
     protected function getPackageProviders($app)
@@ -22,14 +25,14 @@ class TestCase extends BaseTestCase
         ];
     }
 
-    protected function getEnvironmentSetUp($app)
+    protected function defineDatabaseMigrations()
     {
-        include_once $this->baseDir().DIRECTORY_SEPARATOR.'database'.DIRECTORY_SEPARATOR.'setup_default_tables_2022.php';
-
-        (new \SetupDefaultTables2022)->up();
+        $this->loadMigrationsFrom($this->baseDir() . '/database/migrations');
     }
 
-    private function baseDir(){
-        return str_replace('tests','src',__DIR__);
+
+    private function baseDir()
+    {
+        return str_replace('tests', 'src', __DIR__);
     }
 }
