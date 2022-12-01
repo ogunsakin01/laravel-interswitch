@@ -15,7 +15,7 @@ A laravel package for Interswitch
 To get the latest version of Laravel Interswitch, simply require it
 
 ```bash
-composer require ogunsakindamilola/laravel-interswitch
+composer require ogunsakin01/laravel-interswitch
 ```
 
 ## Configuration
@@ -24,7 +24,7 @@ You can publish the configuration file using this command:
 ```bash
 php artisan vendor:publish
 ```
-Then select `ogunsakindamilola/laravel-interswitch`
+Then select `ogunsakin01/laravel-interswitch`
 
 A configuration-file named `interswitch.php` with some sensible defaults will be placed in your `config` directory:
 
@@ -201,8 +201,4 @@ That's it, you are good to go
 
 ## Now that you are here
 Thank you for taking your time with my package. 
-
-Be generous with you stars and don't forget to follow me on IG and Twitter 
-
-[@he_is_unique](https://twitter.com/he_is_unique)
 
